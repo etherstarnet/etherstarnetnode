@@ -426,6 +426,8 @@ func (c *ChainConfig) String() string {
 
 	banner += fmt.Sprintf("EthStarnet Algo :  (%s)\n", c.Ethash)
 
+	banner += fmt.Sprintf("TerminalTotalDifficulty :  (%s)\n", c.TerminalTotalDifficulty)
+
 	switch {
 	case c.Ethash != nil:
 		if c.TerminalTotalDifficulty == nil {
