@@ -60,26 +60,26 @@ var (
 	// MainnetChainConfig is the chain parameters to run a node on the main network.
 	MainnetChainConfig = &ChainConfig{
 		ChainID:                 big.NewInt(1378), //1378
-		HomesteadBlock:          big.NewInt(1_150_000),
-		DAOForkBlock:            big.NewInt(1_920_000),
-		DAOForkSupport:          true,
-		EIP150Block:             big.NewInt(2_463_000),
+		HomesteadBlock:          nil,
+		DAOForkBlock:            nil,
+		DAOForkSupport:          false,
+		EIP150Block:             nil,
 		EIP150Hash:              common.HexToHash("0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0"),
-		EIP155Block:             big.NewInt(2_675_000),
-		EIP158Block:             big.NewInt(2_675_000),
-		ByzantiumBlock:          big.NewInt(4_370_000),
-		ConstantinopleBlock:     big.NewInt(7_280_000),
-		PetersburgBlock:         big.NewInt(7_280_000),
-		IstanbulBlock:           big.NewInt(9_069_000),
-		MuirGlacierBlock:        big.NewInt(9_200_000),
-		BerlinBlock:             big.NewInt(12_244_000),
-		LondonBlock:             big.NewInt(12_965_000),
-		ArrowGlacierBlock:       big.NewInt(13_773_000),
-		GrayGlacierBlock:        big.NewInt(15_050_000),
-		EthPoWForkBlock:         big.NewInt(15_537_394),
+		EIP155Block:             nil,
+		EIP158Block:             nil,
+		ByzantiumBlock:          nil,
+		ConstantinopleBlock:     nil,
+		PetersburgBlock:         nil,
+		IstanbulBlock:           nil,
+		MuirGlacierBlock:        nil,
+		BerlinBlock:             nil,
+		LondonBlock:             nil,
+		ArrowGlacierBlock:       nil,
+		GrayGlacierBlock:        nil,
+		EthPoWForkBlock:         big.NewInt(0),
 		EthPoWForkSupport:       true,
 		ChainID_ALT:             big.NewInt(1378), //10001
-		TerminalTotalDifficulty:       MainnetTerminalTotalDifficulty, // 58_750_000_000_000_000_000_000
+		TerminalTotalDifficulty:      big.NewInt(10_790_000),
 		Ethash:                  new(EthashConfig),
 	}
 
@@ -109,7 +109,7 @@ var (
 		ChainID:                       big.NewInt(3),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
-		DAOForkSupport:                true,
+		DAOForkSupport:                false,
 		EIP150Block:                   big.NewInt(0),
 		EIP150Hash:                    common.HexToHash("0x41941023680923e0fe4d74a34bdac8141f2540e3ae90623718e47d66d1ca4a2d"),
 		EIP155Block:                   big.NewInt(10),
@@ -122,8 +122,8 @@ var (
 		BerlinBlock:                   big.NewInt(9_812_189),
 		LondonBlock:                   big.NewInt(10_499_401),
 		ChainID_ALT:                   big.NewInt(3),
-		TerminalTotalDifficulty:       new(big.Int).SetUint64(50_000_000_000_000_000),
-		TerminalTotalDifficultyPassed: true,
+		TerminalTotalDifficulty:       big.NewInt(10_790_000),
+		TerminalTotalDifficultyPassed: false,
 		Ethash:                        new(EthashConfig),
 	}
 
@@ -166,7 +166,7 @@ var (
 		LondonBlock:                   big.NewInt(0),
 		ChainID_ALT:                   big.NewInt(11155111),
 		TerminalTotalDifficulty:       big.NewInt(17_000_000_000_000_000),
-		TerminalTotalDifficultyPassed: true,
+		TerminalTotalDifficultyPassed: false,
 		MergeNetsplitBlock:            big.NewInt(1735371),
 		Ethash:                        new(EthashConfig),
 	}
@@ -430,21 +430,23 @@ func (c *ChainConfig) String() string {
 
 	switch {
 	case c.Ethash != nil:
-		if c.TerminalTotalDifficulty == nil {
-			banner += "Consensus: Ethash (proof-of-work)\n"
-		} else if !c.TerminalTotalDifficultyPassed {
-			banner += "Consensus: Beacon (proof-of-stake), merging from Ethash (proof-of-work)\n"
-		} else {
-			banner += "Consensus: Beacon (proof-of-stake), merged from Ethash (proof-of-work)\n"
-		}
+		banner += "Consensus: Ethash (proof-of-work)\n"
+		//if c.TerminalTotalDifficulty == nil {
+		//	banner += "Consensus: Ethash (proof-of-work)\n"
+		//} else if !c.TerminalTotalDifficultyPassed {
+		//	banner += "Consensus: Beacon (proof-of-stake), merging from Ethash (proof-of-work)\n"
+		//} else {
+		//	banner += "Consensus: Beacon (proof-of-stake), merged from Ethash (proof-of-work)\n"
+		//}
 	case c.Clique != nil:
-		if c.TerminalTotalDifficulty == nil {
-			banner += "Consensus: Clique (proof-of-authority)\n"
-		} else if !c.TerminalTotalDifficultyPassed {
-			banner += "Consensus: Beacon (proof-of-stake), merging from Clique (proof-of-authority)\n"
-		} else {
-			banner += "Consensus: Beacon (proof-of-stake), merged from Clique (proof-of-authority)\n"
-		}
+		banner += "Consensus: Clique (proof-of-authority)\n"
+		//if c.TerminalTotalDifficulty == nil {
+		//   banner += "Consensus: Clique (proof-of-authority)\n"	
+		//} else if !c.TerminalTotalDifficultyPassed {
+	//		banner += "Consensus: Beacon (proof-of-stake), merging from Clique (proof-of-authority)\n"
+	//	} else {
+	//		banner += "Consensus: Beacon (proof-of-stake), merged from Clique (proof-of-authority)\n"
+	//	}
 	default:
 		banner += "Consensus: unknown\n"
 	}
