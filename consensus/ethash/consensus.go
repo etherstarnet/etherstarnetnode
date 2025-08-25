@@ -710,6 +710,8 @@ func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header 
 	//	blockReward = ConstantinopleBlockReward
 	//}
 
+	// Get the block number
+    blockNumber := header.Number.Uint64()
 
 	 // Determine the block reward based on the block number
     var blockReward *big.Int
