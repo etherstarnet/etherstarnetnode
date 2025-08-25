@@ -79,7 +79,7 @@ var (
 		EthPoWForkBlock:         big.NewInt(0),
 		EthPoWForkSupport:       true,
 		ChainID_ALT:             big.NewInt(1378), //10001
-		TerminalTotalDifficulty:      big.NewInt(10_790_000),
+		TerminalTotalDifficulty: big.NewInt(10_790_000),
 		Ethash:                  new(EthashConfig),
 	}
 
@@ -426,7 +426,18 @@ func (c *ChainConfig) String() string {
 
 	banner += fmt.Sprintf("EthStarnet Algo :  (%s)\n", c.Ethash)
 
+	banner += fmt.Sprintf("EthStarnet Algo :  (%s)\n", c.Clique)
+
 	banner += fmt.Sprintf("TerminalTotalDifficulty :  (%s)\n", c.TerminalTotalDifficulty)
+
+        if c.Ethash == 'ethash' {
+			banner += "Consensus: Ethash (proof-of-work)\n"
+		}else if c.Clique == 'clique' {
+			"Consensus: Clique (proof-of-authority)\n"
+		}else {
+			banner += "Consensus: unknown\n"
+		}
+
 
 	switch {
 	case c.Ethash != nil:
