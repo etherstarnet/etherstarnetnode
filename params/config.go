@@ -430,9 +430,9 @@ func (c *ChainConfig) String() string {
 
 	banner += fmt.Sprintf("TerminalTotalDifficulty :  (%s)\n", c.TerminalTotalDifficulty)
 
-        if c.Ethash == "ethash" {
+        if c.Ethash != nil {
 			banner += "Consensus: Ethash (proof-of-work)\n"
-		}else if c.Clique == "clique" {
+		}else if c.Clique != nil {
 			banner += "Consensus: Clique (proof-of-authority)\n"
 		}else {
 			banner += "Consensus: unknown\n"
