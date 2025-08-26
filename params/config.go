@@ -80,7 +80,7 @@ var (
 		EthPoWForkBlock:         big.NewInt(0),
 		EthPoWForkSupport:       true,
 		ChainID_ALT:             big.NewInt(1378), //10001
-		TerminalTotalDifficulty: big.NewInt(10_790_000),
+		TerminalTotalDifficulty: MainnetTerminalTotalDifficulty,
 		Ethash:                  new(EthashConfig),
 	}
 
@@ -383,7 +383,7 @@ type ChainConfig struct {
 	ChainID_ALT         *big.Int `json:"chainId_alt"`                   // chainId alt identifies the current chain after pos switch and is used for replay protection
 	// TerminalTotalDifficulty is the amount of total difficulty reached by
 	// the network that triggers the consensus upgrade.
-	//TerminalTotalDifficulty *big.Int `json:"terminalTotalDifficulty,omitempty"`
+	TerminalTotalDifficulty *big.Int `json:"terminalTotalDifficulty,omitempty"`
 
 	// TerminalTotalDifficultyPassed is a flag specifying that the network already
 	// passed the terminal total difficulty. Its purpose is to disable legacy sync
