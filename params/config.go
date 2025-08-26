@@ -436,8 +436,6 @@ func (c *ChainConfig) String() string {
 
 	banner += "Consensus: Ethash (proof-of-work)\n"
 
-	banner += fmt.Sprintf("EthStarnet - EthPoW starts at block :                      %-8v\n", c.EthPoWForkBlock)
-
     banner += "\n"
 
 	return banner
