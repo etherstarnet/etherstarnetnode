@@ -418,6 +418,9 @@ func (c *CliqueConfig) String() string {
 func (c *ChainConfig) String() string {
 	var banner string
 
+	c.TerminalTotalDifficulty = new(big.Int)
+    c.TerminalTotalDifficulty.SetString("58750000000000000000000", 10)
+
 	// Create some basinc network config output
 	network := NetworkNames[c.ChainID.String()]
 	if network == "" {
@@ -433,12 +436,9 @@ func (c *ChainConfig) String() string {
 
 	banner += "Consensus: Ethash (proof-of-work)\n"
 
-    banner += "\n"
+	banner += fmt.Sprintf("EthStarnet - EthPoW starts at block :                      %-8v\n", c.EthPoWForkBlock)
 
-	if c.EthPoWForkBlock != nil {
-		banner += fmt.Sprintf(" - EthPoW:                      %-8v\n", c.EthPoWForkBlock)
-	}
-	banner += "\n"
+    banner += "\n"
 
 	return banner
 }
