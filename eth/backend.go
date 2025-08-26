@@ -128,6 +128,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 
 	// Transfer mining-related config to the ethash config.
 	ethashConfig := config.Ethash
+
 	ethashConfig.NotifyFull = config.Miner.NotifyFull
 
 	// Assemble the Ethereum object
