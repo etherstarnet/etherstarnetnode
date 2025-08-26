@@ -433,7 +433,7 @@ func (c *ChainConfig) String() string {
         if c.Ethash == 'ethash' {
 			banner += "Consensus: Ethash (proof-of-work)\n"
 		}else if c.Clique == 'clique' {
-			"Consensus: Clique (proof-of-authority)\n"
+			banner += "Consensus: Clique (proof-of-authority)\n"
 		}else {
 			banner += "Consensus: unknown\n"
 		}
