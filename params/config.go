@@ -61,28 +61,29 @@ var (
 	// MainnetChainConfig is the chain parameters to run a node on the main network.
 	MainnetChainConfig = &ChainConfig{
 		ChainID:                 big.NewInt(1378), //1378
-		HomesteadBlock:          nil,
-		DAOForkBlock:            nil,
-		DAOForkSupport:          false,
-		EIP150Block:             nil,
+		HomesteadBlock:          big.NewInt(1_150_000),
+		DAOForkBlock:            big.NewInt(1_920_000),
+		DAOForkSupport:          true,
+		EIP150Block:             big.NewInt(2_463_000),
 		EIP150Hash:              common.HexToHash("0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0"),
-		EIP155Block:             nil,
-		EIP158Block:             nil,
-		ByzantiumBlock:          nil,
-		ConstantinopleBlock:     nil,
-		PetersburgBlock:         nil,
-		IstanbulBlock:           nil,
-		MuirGlacierBlock:        nil,
-		BerlinBlock:             nil,
-		LondonBlock:             nil,
-		ArrowGlacierBlock:       nil,
-		GrayGlacierBlock:        nil,
-		EthPoWForkBlock:         big.NewInt(0),
+		EIP155Block:             big.NewInt(2_675_000),
+		EIP158Block:             big.NewInt(2_675_000),
+		ByzantiumBlock:          big.NewInt(4_370_000),
+		ConstantinopleBlock:     big.NewInt(7_280_000),
+		PetersburgBlock:         big.NewInt(7_280_000),
+		IstanbulBlock:           big.NewInt(9_069_000),
+		MuirGlacierBlock:        big.NewInt(9_200_000),
+		BerlinBlock:             big.NewInt(12_244_000),
+		LondonBlock:             big.NewInt(12_965_000),
+		ArrowGlacierBlock:       big.NewInt(13_773_000),
+		GrayGlacierBlock:        big.NewInt(15_050_000),
+		EthPoWForkBlock:         big.NewInt(15_537_394),
 		EthPoWForkSupport:       true,
-		ChainID_ALT:             big.NewInt(1378), //10001
-		TerminalTotalDifficulty: MainnetTerminalTotalDifficulty,
+		ChainID_ALT:             big.NewInt(1378), //1378
+		TerminalTotalDifficulty: nil,               // 58_750_000_000_000_000_000_000
 		Ethash:                  new(EthashConfig),
 	}
+
 
 	// MainnetTrustedCheckpoint contains the light client trusted checkpoint for the main network.
 	MainnetTrustedCheckpoint = &TrustedCheckpoint{
@@ -418,8 +419,8 @@ func (c *CliqueConfig) String() string {
 func (c *ChainConfig) String() string {
 	var banner string
 
-	c.TerminalTotalDifficulty = new(big.Int)
-    c.TerminalTotalDifficulty.SetString("58750000000000000000000", 10)
+	//c.TerminalTotalDifficulty = new(big.Int)
+    //c.TerminalTotalDifficulty.SetString("58750000000000000000000", 10)
 
 	// Create some basinc network config output
 	network := NetworkNames[c.ChainID.String()]
@@ -432,7 +433,7 @@ func (c *ChainConfig) String() string {
 
 	//banner += fmt.Sprintf("EthStarnet Algo :  (%s)\n", c.Clique)
 
-	banner += fmt.Sprintf("TerminalTotalDifficulty :  (%s)\n", c.TerminalTotalDifficulty)
+	//banner += fmt.Sprintf("TerminalTotalDifficulty :  (%s)\n", c.TerminalTotalDifficulty)
 
 	banner += "Consensus: Ethash (proof-of-work)\n"
 
