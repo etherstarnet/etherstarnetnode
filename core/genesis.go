@@ -242,7 +242,7 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, genesis *Genesis, override
 	if (stored == common.Hash{}) {
 		if genesis == nil {
 			log.Info("Writing default main-net genesis block")
-			genesis = DefaultOctaMainnetGenesisBlock()
+			genesis = DefaultEtherStarnetMainnetGenesisBlock()
 		} else {
 			log.Info("Writing custom genesis block")
 		}
@@ -326,8 +326,8 @@ func (g *Genesis) configOrDefault(ghash common.Hash) *params.ChainConfig {
 	switch {
 	case g != nil:
 		return g.Config
-	case ghash == params.OctaMainnetGenesisHash:
-		return params.OctaMainnetChainConfig
+	case ghash == params.EtherStarnetMainnetGenesisHash:
+		return params.EtherStarnetMainnetChainConfig
 	case ghash == params.MainnetGenesisHash:
 		return params.MainnetChainConfig
 	case ghash == params.RopstenGenesisHash:
@@ -505,9 +505,9 @@ func DefaultKilnGenesisBlock() *Genesis {
 	return g
 }
 
-func DefaultOctaMainnetGenesisBlock() *Genesis {
+func DefaultEtherStarnetMainnetGenesisBlock() *Genesis {
 	return &Genesis{
-		Config:     params.OctaMainnetChainConfig,
+		Config:     params.EtherStarnetMainnetChainConfig,
 		ExtraData:  hexutil.MustDecode("0x4f4354415350414345494e4954"),
 		GasLimit:   10400000,
 		Difficulty: big.NewInt(100_000_000_000), // 100 G
@@ -517,15 +517,15 @@ func DefaultOctaMainnetGenesisBlock() *Genesis {
 	}
 }
 
-func DefaultOctaTestnetGenesisBlock() *Genesis {
+func DefaultEtherStarnetTestnetGenesisBlock() *Genesis {
     return &Genesis{
-        Config:     params.OctaTestnetChainConfig,
+        Config:     params.EtherStarnetTestnetChainConfig,
         ExtraData:  hexutil.MustDecode("0x4f4354415350414345494e4954"),
         GasLimit:   10400000,
         Difficulty: big.NewInt(1),
         Timestamp:  1654041600, // June 1, 2022, 00:00:00
         Nonce:      0,
-        Alloc:      decodePrealloc(octaTestnetAllocData),
+        Alloc:      decodePrealloc(etherStartnetTestnetAllocData),
     }
 }
 

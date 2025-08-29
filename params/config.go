@@ -33,8 +33,8 @@ var (
 	RinkebyGenesisHash     = common.HexToHash("0x6341fd3daf94b748c72ced5a5b26028f2474f5f00d824504e4fa37a75767e177")
 	GoerliGenesisHash      = common.HexToHash("0xbf7e331f7f7c1dd2e05159666b3bf8bc7a8a3a9eb1d518969eab529dd9b88c1a")
 	KilnGenesisHash        = common.HexToHash("0x51c7fe41be669f69c45c33a56982cbde405313342d9e2b00d7c91a7b284dd4f8")
-	OctaMainnetGenesisHash = common.HexToHash("0x4328489cccd9b8a33d4c5a63e813d883863e1ae1389a945b28b49d650f9227e9")
-	OctaTestnetGenesisHash = common.HexToHash("0x14c574f22553f5c076546a073bf22698091edce529b8b13a9a4ce0b1a284befc")
+	EtherStarnetMainnetGenesisHash = common.HexToHash("0x4328489cccd9b8a33d4c5a63e813d883863e1ae1389a945b28b49d650f9227e9")
+	EtherStarnetTestnetGenesisHash = common.HexToHash("0x14c574f22553f5c076546a073bf22698091edce529b8b13a9a4ce0b1a284befc")
 )
 
 // TrustedCheckpoints associates each known checkpoint with the genesis hash of
@@ -255,7 +255,7 @@ var (
 		Threshold: 2,
 	}
 
-	OctaMainnetChainConfig = &ChainConfig{
+	EtherStarnetMainnetChainConfig = &ChainConfig{
 		ChainID:             big.NewInt(800001),
 		HomesteadBlock:      big.NewInt(0),
 		DAOForkBlock:        nil,
@@ -272,7 +272,7 @@ var (
 		BerlinBlock:         big.NewInt(0),
 		LondonBlock:         nil,
 		ArrowGlacierBlock:   nil,
-		OctaBlock:           big.NewInt(1),
+		EtherStarnetBlock:   big.NewInt(1),
 		ArcturusBlock:       big.NewInt(650_000),
 		OldenburgBlock:      big.NewInt(1_000_000),
 		ZagamiBlock:         big.NewInt(1_500_000),
@@ -286,7 +286,7 @@ var (
 		Ethash:              new(EthashConfig),
 	}
 
-	OctaTestnetChainConfig = &ChainConfig{
+	EtherStarnetTestnetChainConfig = &ChainConfig{
 		ChainID:             big.NewInt(800002),
 		HomesteadBlock:      big.NewInt(0),
 		DAOForkBlock:        nil,
@@ -303,7 +303,7 @@ var (
 		BerlinBlock:         big.NewInt(0),
 		LondonBlock:         nil,
 		ArrowGlacierBlock:   nil,
-		OctaBlock:           big.NewInt(1),
+		EtherStarnetBlock:           big.NewInt(1),
 		ArcturusBlock:       big.NewInt(20),
 		OldenburgBlock:      big.NewInt(30),
 		ZagamiBlock:         big.NewInt(40),
@@ -413,7 +413,7 @@ type ChainConfig struct {
 	LondonBlock         *big.Int `json:"londonBlock,omitempty"`         // London switch block (nil = no fork, 0 = already on london)
 	ArrowGlacierBlock   *big.Int `json:"arrowGlacierBlock,omitempty"`   // Eip-4345 (bomb delay) switch block (nil = no fork, 0 = already activated)
 	MergeForkBlock      *big.Int `json:"mergeForkBlock,omitempty"`      // EIP-3675 (TheMerge) switch block (nil = no fork, 0 = already in merge proceedings)
-	OctaBlock           *big.Int `json:"OctaBlock,omitempty"`
+	EtherStarnetBlock   *big.Int `json:"EtherStarnetBlock,omitempty"`
 	ArcturusBlock       *big.Int `json:"arcturusBlock,omitempty"`
 	OldenburgBlock      *big.Int `json:"oldenburgBlock,omitempty"`
 	ZagamiBlock         *big.Int `json:"zagamiBlock,omitempty"`
@@ -464,7 +464,7 @@ func (c *ChainConfig) String() string {
 	default:
 		engine = "unknown"
 	}
-	return fmt.Sprintf("{ChainID: %v Homestead: %v DAO: %v DAOSupport: %v EIP150: %v EIP155: %v EIP158: %v Byzantium: %v Constantinople: %v Petersburg: %v Istanbul: %v, Muir Glacier: %v, Berlin: %v, Octa: %v, Arcturus: %v, Oldenburg: %v, Zagami: %v, Springwater: %v, Polaris: %v, Mahasim: %v, Dnepr: %v, Blackeye: %v, Vega: %v, Triangulum: %v, Engine: %v}",
+	return fmt.Sprintf("{ChainID: %v Homestead: %v DAO: %v DAOSupport: %v EIP150: %v EIP155: %v EIP158: %v Byzantium: %v Constantinople: %v Petersburg: %v Istanbul: %v, Muir Glacier: %v, Berlin: %v, EtherStarnet: %v, Arcturus: %v, Oldenburg: %v, Zagami: %v, Springwater: %v, Polaris: %v, Mahasim: %v, Dnepr: %v, Blackeye: %v, Vega: %v, Triangulum: %v, Engine: %v}",
 		c.ChainID,
 		c.HomesteadBlock,
 		c.DAOForkBlock,
@@ -478,7 +478,7 @@ func (c *ChainConfig) String() string {
 		c.IstanbulBlock,
 		c.MuirGlacierBlock,
 		c.BerlinBlock,
-		c.OctaBlock,
+		c.EtherStarnetBlock,
 		c.ArcturusBlock,
 		c.OldenburgBlock,
 		c.ZagamiBlock,
@@ -568,8 +568,8 @@ func (c *ChainConfig) IsTerminalPoWBlock(parentTotalDiff *big.Int, totalDiff *bi
 	return parentTotalDiff.Cmp(c.TerminalTotalDifficulty) < 0 && totalDiff.Cmp(c.TerminalTotalDifficulty) >= 0
 }
 
-func (c *ChainConfig) IsOcta(num *big.Int) bool {
-	return isForked(c.OctaBlock, num)
+func (c *ChainConfig) IsEtherStarnet(num *big.Int) bool {
+	return isForked(c.EtherStarnetBlock, num)
 }
 
 func (c *ChainConfig) IsArcturus(num *big.Int) bool {
@@ -651,7 +651,7 @@ func (c *ChainConfig) CheckConfigForkOrder() error {
 		{name: "istanbulBlock", block: c.IstanbulBlock},
 		{name: "muirGlacierBlock", block: c.MuirGlacierBlock, optional: true},
 		{name: "berlinBlock", block: c.BerlinBlock},
-		{name: "octaBlock", block: c.OctaBlock},
+		{name: "etherStarnetBlock", block: c.EtherStarnetBlock},
 		{name: "arcturusBlock", block: c.ArcturusBlock},
 		{name: "oldenburgBlock", block: c.OldenburgBlock},
 		{name: "zagamiBlock", block: c.ZagamiBlock},
@@ -731,8 +731,8 @@ func (c *ChainConfig) checkCompatible(newcfg *ChainConfig, head *big.Int) *Confi
 	if isForkIncompatible(c.BerlinBlock, newcfg.BerlinBlock, head) {
 		return newCompatError("Berlin fork block", c.BerlinBlock, newcfg.BerlinBlock)
 	}
-	if isForkIncompatible(c.OctaBlock, newcfg.OctaBlock, head) {
-		return newCompatError("Octa fork block", c.OctaBlock, newcfg.OctaBlock)
+	if isForkIncompatible(c.EtherStarnetBlock, newcfg.EtherStarnetBlock, head) {
+		return newCompatError("EtherStarnet fork block", c.EtherStarnetBlock, newcfg.EtherStarnetBlock)
 	}
 	if isForkIncompatible(c.ArcturusBlock, newcfg.ArcturusBlock, head) {
 		return newCompatError("Arcturus fork block", c.ArcturusBlock, newcfg.ArcturusBlock)
@@ -840,7 +840,7 @@ type Rules struct {
 	ChainID                                                 *big.Int
 	IsHomestead, IsEIP150, IsEIP155, IsEIP158               bool
 	IsByzantium, IsConstantinople, IsPetersburg, IsIstanbul bool
-	IsBerlin, IsOcta                                        bool
+	IsBerlin, EtherStarnet                                  bool
 	IsArcturus                                              bool
 	IsOldenburg                                             bool
 	IsZagami                                                bool
@@ -871,7 +871,7 @@ func (c *ChainConfig) Rules(num *big.Int, isMerge bool) Rules {
 		IsPetersburg:     c.IsPetersburg(num),
 		IsIstanbul:       c.IsIstanbul(num),
 		IsBerlin:         c.IsBerlin(num),
-		IsOcta:           c.IsOcta(num),
+		IsEtherStarnet:   c.IsEtherStarnet(num),
 		IsArcturus:       c.IsArcturus(num),
 		IsOldenburg:      c.IsOldenburg(num),
 		IsZagami:         c.IsZagami(num),

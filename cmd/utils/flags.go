@@ -143,11 +143,11 @@ var (
 	}
 	MainnetFlag = cli.BoolFlag{
 		Name:  "mainnet",
-		Usage: "OctaSpace mainnet",
+		Usage: "EtherStarnet mainnet",
 	}
 	TestnetFlag = cli.BoolFlag{
 		Name: "testnet",
-		Usage: "OctaSpace testnet",
+		Usage: "EtherStarnet testnet",
 	}
 	GoerliFlag = cli.BoolFlag{
 		Name:  "goerli",
@@ -892,7 +892,7 @@ func setNodeUserIdent(ctx *cli.Context, cfg *node.Config) {
 // setBootstrapNodes creates a list of bootstrap nodes from the command line
 // flags, reverting to pre-configured ones if none have been specified.
 func setBootstrapNodes(ctx *cli.Context, cfg *p2p.Config) {
-	urls := params.OctaMainnetBootnodes
+	urls := params.EtherStarnetMainnetBootnodes
 	switch {
 	case ctx.GlobalIsSet(BootnodesFlag.Name):
 		urls = SplitAndTrim(ctx.GlobalString(BootnodesFlag.Name))
@@ -907,7 +907,7 @@ func setBootstrapNodes(ctx *cli.Context, cfg *p2p.Config) {
 	case ctx.GlobalBool(KilnFlag.Name):
 		urls = params.KilnBootnodes
 	case ctx.GlobalBool(TestnetFlag.Name):
-		urls = params.OctaTestnetBootnodes
+		urls = params.EtherStarnetTestnetBootnodes
 	case cfg.BootstrapNodes != nil:
 		return // already set, don't apply defaults.
 	}
@@ -1688,14 +1688,14 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *ethconfig.Config) {
 		if !ctx.GlobalIsSet(NetworkIdFlag.Name) {
 			cfg.NetworkId = 800001
 		}
-		cfg.Genesis = core.DefaultOctaMainnetGenesisBlock()
-		SetDNSDiscoveryDefaults(cfg, params.OctaMainnetGenesisHash)
+		cfg.Genesis = core.DefaultEtherStarnetMainnetGenesisBlock()
+		SetDNSDiscoveryDefaults(cfg, params.EtherStarnetMainnetGenesisHash)
 	case ctx.GlobalBool(TestnetFlag.Name):
 		if !ctx.GlobalIsSet(NetworkIdFlag.Name) {
 			cfg.NetworkId = 800002
 		}
-		cfg.Genesis = core.DefaultOctaTestnetGenesisBlock()
-		SetDNSDiscoveryDefaults(cfg, params.OctaTestnetGenesisHash)
+		cfg.Genesis = core.DefaultEtherStarnetTestnetGenesisBlock()
+		SetDNSDiscoveryDefaults(cfg, params.EtherStarnetTestnetGenesisHash)
 	case ctx.GlobalBool(RopstenFlag.Name):
 		if !ctx.GlobalIsSet(NetworkIdFlag.Name) {
 			cfg.NetworkId = 3
@@ -1955,9 +1955,9 @@ func MakeGenesis(ctx *cli.Context) *core.Genesis {
 	var genesis *core.Genesis
 	switch {
 	case ctx.GlobalBool(MainnetFlag.Name):
-		genesis = core.DefaultOctaMainnetGenesisBlock()
+		genesis = core.DefaultEtherStarnetMainnetGenesisBlock()
 	case ctx.GlobalBool(TestnetFlag.Name):
-		genesis = core.DefaultOctaTestnetGenesisBlock()
+		genesis = core.DefaultEtherStarnetTestnetGenesisBlock()
 	case ctx.GlobalBool(RopstenFlag.Name):
 		genesis = core.DefaultRopstenGenesisBlock()
 	case ctx.GlobalBool(SepoliaFlag.Name):

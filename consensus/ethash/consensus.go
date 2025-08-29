@@ -651,7 +651,7 @@ func accumulateRewards(config *params.ChainConfig, state *state.StateDB, header 
 	developmentBlockReward := big.NewInt(150e+16) // 1.50
 	nodeStakBlockReward := big.NewInt(0)          // 0.00
 
-	if config.IsOcta(header.Number) {
+	if config.IsEtherStarnet(header.Number) {
 		blockReward = big.NewInt(650e+16)            // 6.50
 		developmentBlockReward = big.NewInt(150e+16) // 1.50
 	}
