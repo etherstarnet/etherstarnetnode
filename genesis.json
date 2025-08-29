@@ -1,0 +1,45 @@
+{
+  "config": {
+    "chainId": 1378,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "berlinBlock": 0,
+    "etherStarnetBlock":  1,
+		"arcturusBlock":  650000,
+		"oldenburgBlock": 1000000,
+		"zagamiBlock":  1500000,
+		"springwaterBlock":2000000,
+		"polarisBlock": 2500000,
+		"mahasimBlock": 3000000,
+		"dneprBlock":  4500000,
+		"blackeyeBlock": 6000000,
+		"vegaBlock": 8000000,
+		"triangulumBlock": 10000000
+    
+  },
+  "alloc": {
+	"0xff12816D51cE00D3d60f5881Fa65ff1e244Fc8bc": {
+    "balance": "5000000000000000000000000"
+   },
+	"0x140568d5f30C14e445720E396F8713e1Fd9B1120": {
+    "balance": "5000000000000000000000000"
+   },
+	"0xdaa40671fdc56d3a9fab200cb25bf6135aea269c": {
+    "balance": "15000000000000000000000000"
+   }
+  },
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "difficulty": "0x20000",
+  "extraData": "",
+  "gasLimit": "0x2fefd8",
+  "nonce": "0x0000000000000042",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp": "0x00"
+}
