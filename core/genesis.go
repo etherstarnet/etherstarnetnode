@@ -525,7 +525,7 @@ func DefaultEtherStarnetTestnetGenesisBlock() *Genesis {
         Difficulty: big.NewInt(1),
         Timestamp:  1654041600, // June 1, 2022, 00:00:00
         Nonce:      0,
-        Alloc:      decodePrealloc(etherStartnetTestnetAllocData),
+        Alloc:      decodePrealloc(etherStarnetTestnetAllocData),
     }
 }
 
